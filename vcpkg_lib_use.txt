@@ -1,0 +1,6 @@
+spdlog
+imgui [docking]
+glm
+glfw3
+freetype
+libosmium

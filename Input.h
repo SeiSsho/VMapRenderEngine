@@ -14,16 +14,16 @@ class Mouse {
 	double _x = 0, _y = 0;
 public:
 	Mouse();
-	inline double getX() const;
-	inline double getY() const;
-	inline void setX(const double& x);
-	inline void setY(const double& y);
+	double getX() const;
+	double getY() const;
+	void setX(const double& x);
+	void setY(const double& y);
 
 	/*
 	 * @return x, y position of mouse.
 	 */
-	inline std::pair<double, double> getPosition() const;
-	inline void setPosition(const double& x, const double& y);
+	std::pair<double, double> getPosition() const;
+	void setPosition(const double& x, const double& y);
 };
 
 class Input
@@ -32,8 +32,8 @@ class Input
 public:
 	static Input getInstance();
 
-	inline KeyBoard& getKeyBoard();
-	inline Mouse& getMouse();
+	KeyBoard& getKeyBoard();
+	Mouse& getMouse();
 private:
 	KeyBoard _keyBoard;
 	Mouse _mouse;

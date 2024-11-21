@@ -1,6 +1,6 @@
 #include "VertexBufferObject.h"
 
-VertexBufferObject::VertexBufferObject(GLfloat* vertices, const GLsizeiptr& size, const Usage& usage)
+VertexBufferObject::VertexBufferObject(GLfloat* vertices, const GLsizeiptr& size, const GLCore::Usage& usage)
 {
 	spdlog::trace("[OpenGL]: Generate vertex buffer array {}", _id);
 	glGenBuffers(1, &_id);
@@ -8,7 +8,7 @@ VertexBufferObject::VertexBufferObject(GLfloat* vertices, const GLsizeiptr& size
 	glBufferData(GL_ARRAY_BUFFER, size, vertices, usage);
 }
 
-VertexBufferObject::VertexBufferObject(std::span<float> vertices, const Usage& usage)
+VertexBufferObject::VertexBufferObject(std::span<float> vertices, const GLCore::Usage& usage)
 {
 	spdlog::trace("[OpenGL]: Generate vertex buffer array {}", _id);
 	glGenBuffers(1, &_id);
@@ -23,12 +23,12 @@ VertexBufferObject::~VertexBufferObject()
 		glDeleteBuffers(1, &_id);
 }
 
-inline void VertexBufferObject::bind() const
+void VertexBufferObject::bind() const
 {
 	glBindBuffer(GL_ARRAY_BUFFER, _id);
 }
 
-inline void VertexBufferObject::unbind() const
+void VertexBufferObject::unbind() const
 {
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }

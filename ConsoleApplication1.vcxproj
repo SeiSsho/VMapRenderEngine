@@ -23,7 +23,7 @@
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{e859d443-2fdc-4aee-9e46-f42a1ef326e9}</ProjectGuid>
     <RootNamespace>ConsoleApplication1</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.20348.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -102,7 +102,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_USE_MATH_DEFINES;_DEBUG;_CONSOLE;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS;NOMINMAX;</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>WIN64;</AdditionalIncludeDirectories>
@@ -120,7 +120,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_USE_MATH_DEFINES;NDEBUG;_CONSOLE;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS;NOMINMAX;</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>WIN64;</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
@@ -136,14 +136,18 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Asset\AssetManager.cpp" />
+    <ClCompile Include="Component\Component.cpp" />
     <ClCompile Include="Component\Camera.cpp" />
     <ClCompile Include="GLObject\ElementBufferObject.cpp" />
+    <ClCompile Include="OSM\Handler.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="GLWindow.cpp" />
     <ClCompile Include="Asset\Material.cpp" />
     <ClCompile Include="Mesh.cpp" />
+    <ClCompile Include="OSM\Node.cpp" />
+    <ClCompile Include="OSM\Database.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Asset\Scene.cpp" />
     <ClCompile Include="Component\Transform.cpp" />
@@ -152,17 +156,22 @@
     <ClCompile Include="GLObject\VertexBufferObject.cpp" />
     <ClCompile Include="GLObject\Texture.cpp" />
     <ClCompile Include="Time.cpp" />
+    <ClCompile Include="OSM\Way.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Asset\AssetManager.h" />
+    <ClInclude Include="Component\Component.h" />
     <ClInclude Include="Component\Camera.h" />
     <ClInclude Include="GLObject\ElementBufferObject.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="OSM\Handler.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="Asset\Material.h" />
     <ClInclude Include="Mesh.h" />
+    <ClInclude Include="OSM\Node.h" />
     <ClInclude Include="OpenGLCore.h" />
     <ClInclude Include="GLWindow.h" />
+    <ClInclude Include="OSM\Database.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Asset\Scene.h" />
     <ClInclude Include="Component\Transform.h" />
@@ -171,6 +180,13 @@
     <ClInclude Include="GLObject\VertexBufferObject.h" />
     <ClInclude Include="GLObject\Texture.h" />
     <ClInclude Include="Time.h" />
+    <ClInclude Include="OSM\Way.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".gitignore" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="vcpkg_lib_use.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

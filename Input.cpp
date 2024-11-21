@@ -6,12 +6,12 @@ Input Input::getInstance()
     return instance;
 }
 
-inline KeyBoard& Input::getKeyBoard()
+KeyBoard& Input::getKeyBoard()
 {
     return _keyBoard;
 }
 
-inline Mouse& Input::getMouse()
+Mouse& Input::getMouse()
 {
     return _mouse;
 }
@@ -20,32 +20,32 @@ Mouse::Mouse()
 {
 }
 
-inline double Mouse::getX() const
+double Mouse::getX() const
 {
     return _x;
 }
 
-inline double Mouse::getY() const
+double Mouse::getY() const
 {
     return _y;
 }
 
-inline void Mouse::setX(const double& x)
+void Mouse::setX(const double& x)
 {
     _x = x;
 }
 
-inline void Mouse::setY(const double& y)
+void Mouse::setY(const double& y)
 {
     _y = y;
 }
 
-inline std::pair<double, double> Mouse::getPosition() const
+std::pair<double, double> Mouse::getPosition() const
 {
     return { _x, _y };
 }
 
-inline void Mouse::setPosition(const double& x, const double& y)
+void Mouse::setPosition(const double& x, const double& y)
 {
     _x = x;
     _y = y;
