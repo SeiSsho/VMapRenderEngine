@@ -1,4 +1,4 @@
-// ConsoleApplication1.cpp : This file contains the 'main' function. Program execution begins and ends there.
+﻿// ConsoleApplication1.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
 
 #include <iostream>
@@ -11,11 +11,11 @@
 #include <osmium/io/any_input.hpp>
 #include <osmium/visitor.hpp>
 #include <osmium/io/pbf_input.hpp>
-
 #include "OSM/Handler.h"
 
 int main()
 {
+	SetConsoleOutputCP(CP_UTF8);
 	vmap::osm::Database::instance();
 	osmium::io::Reader reader(osmium::io::File("C:/Users/tts/Downloads/map (2).osm"));
 	osmium::apply(reader, vmap::osm::Handler());

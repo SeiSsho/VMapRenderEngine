@@ -16,6 +16,7 @@ namespace vmap::osm {
 
 	private:
 		std::unordered_map<long long, std::shared_ptr<vmap::osm::Node>> _nodes;
+		std::unordered_map<long long, std::shared_ptr<vmap::osm::Way>> _ways;
 		static std::unique_ptr<Database> _instance;
 	public:
 		Database(const Database&) = delete;
@@ -27,8 +28,9 @@ namespace vmap::osm {
 		void addNode(const long long& id, std::shared_ptr<vmap::osm::Node> node);
 
 		const std::unordered_map<long long, std::shared_ptr<vmap::osm::Node>>& nodes() const;
+		const std::unordered_map<long long, std::shared_ptr<vmap::osm::Way>>& ways() const;
+
 		static Database& instance();
-		
-	private:
+
 	};
 }

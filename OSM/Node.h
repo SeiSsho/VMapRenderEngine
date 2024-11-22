@@ -4,6 +4,8 @@
 #include <memory>
 #include <list>
 #include <string_view>
+#include <string>
+#include <optional>
 
 namespace vmap::osm {
 	class Node {
@@ -12,7 +14,7 @@ namespace vmap::osm {
 		static constexpr double COORDINATE_PRECISION = 10000000;
 
 		int32_t _x, _y;
-		std::unordered_map<const char*, const char*> _tags;
+		std::unordered_map<std::string, std::string> _tags;
 	public:
 		Node();
 		Node(const int32_t& x, const int32_t& y);
@@ -25,5 +27,9 @@ namespace vmap::osm {
 
 		double lat() const { return static_cast<double>(_x) / COORDINATE_PRECISION; }
 		double lon() const { return static_cast<double>(_y) / COORDINATE_PRECISION; }
+
+		const std::unordered_map<std::string, std::string>& tags() const;
+
+		std::optional<std::string> getTagValue(std::string key) const;
 	};
 };

@@ -8,6 +8,10 @@ const std::unordered_map<long long, std::shared_ptr<vmap::osm::Node>>& vmap::osm
 	return _nodes;
 }
 
+const std::unordered_map<long long, std::shared_ptr<vmap::osm::Way>>& vmap::osm::Database::ways() const {
+	return _ways;
+}
+
 std::unique_ptr<vmap::osm::Database> vmap::osm::Database::_instance = nullptr;
 vmap::osm::Database& vmap::osm::Database::instance() {
 	if (!_instance) {

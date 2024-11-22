@@ -7,8 +7,10 @@
 #include "Component/Camera.h"
 #include "GLObject/Shader.h"
 #include <future>
+#include <iostream>
 
 #include "OSM/Database.h"
+#include "OSM/Way.h"
 
 GLWindow::GLWindow(std::string_view title, const int& width, const int& height, const bool& useVsync)
 {
@@ -48,9 +50,12 @@ GLWindow::GLWindow(std::string_view title, const int& width, const int& height, 
 	}
 
 	Transform cameraTransform;
-	cameraTransform._position = { 210, 1050, -100 };
+	//cameraTransform._position = { 210, 1055, -3 };
+	cameraTransform._position = { 1055, 210, 3 };
+	cameraTransform._rotation = glm::quat(glm::vec3(0.0f, glm::radians(180.0f), 0.0f));
 	camera = std::make_shared<Camera>(cameraTransform, 45.0f, _windowInfo.getAspect(), 0.00001f, 1000000.0f);
-	//camera = std::make_shared<Camera>(cameraTransform,-width, width, -height, height, 0.00001f, 1000000.0f);
+	//camera = std::make_shared<Camera>(cameraTransform, 
+		//-1 * _windowInfo.getAspect() / 2, 1 * _windowInfo.getAspect() / 2, 1.0 / 2, -1.0 / 2, 0.00001f, 1000000.0f);
 }
 
 GLWindow::~GLWindow()
@@ -62,21 +67,43 @@ GLWindow::~GLWindow()
 void GLWindow::run()
 {
 	auto vao = std::make_unique<VertexAttributeObject>();
-	std::vector<float> arr;
-	for (const auto& node : vmap::osm::Database::instance().nodes()) {
-		arr.push_back(static_cast<float>(node.second->lon() * 10));
-		arr.push_back(static_cast<float>(node.second->lat() * 10));
-		arr.push_back(0.0f);
+	unsigned long long size = 0;
+	{
+		std::vector<float> arr;
+		for (const auto& node : vmap::osm::Database::instance().nodes()) {
+			arr.push_back(static_cast<float>(node.second->lat() * 10));
+			arr.push_back(static_cast<float>(node.second->lon() * 10));
+			arr.push_back(0.0f);
+		}
+		//int c = 0;
+		//for (const auto& way : vmap::osm::Database::instance().ways()) {
+		//	//auto otp = way.second->getTagValue("highway");
+		//	//if (otp.has_value()) {
+		//	for (int i = 0; i < way.second->_nodes.size() - 2; i++) {
+		//		auto nodes = way.second->_nodes;
+		//			auto lat = static_cast<float>(nodes[i]->lat() * 10);
+		//			auto lon = static_cast<float>(nodes[i]->lon() * 10);
+		//			arr.push_back(lat);
+		//			arr.push_back(lon);
+		//			arr.push_back(0.0f);
+		//			lat = static_cast<float>(nodes[i + 1]->lat() * 10);
+		//			lon = static_cast<float>(nodes[i + 1]->lon() * 10);
+		//			arr.push_back(lat);
+		//			arr.push_back(lon);
+		//			arr.push_back(0.0f);
+		//		}
+		//	//}
+		//	c++;
+		//}
+
+		VertexBufferObject vbo = VertexBufferObject(arr);
+		vao->bind();
+		vbo.bind();
+		vao->link(vbo, 0, 3, GLCore::Type::Float, sizeof(float) * 3, 0);
+		vbo.unbind();
+		vao->unbind();
+		size = arr.size();
 	}
-
-
-	VertexBufferObject vbo = VertexBufferObject(arr);
-	vao->bind();
-	vbo.bind();
-	vao->link(vbo, 0, 3, GLCore::Type::Float, sizeof(float) * 3, 0);
-	vbo.unbind();
-	vao->unbind();
-
 
 	auto shader = ShaderRegistry::getDefaultShader();
 	auto shaderId = shader->getId();
@@ -85,7 +112,7 @@ void GLWindow::run()
 	GLuint projLoc = glGetUniformLocation(shaderId, "projection");
 
 	Transform objectTransform;
-	Mesh mesh(std::move(vao), arr.size(), GLCore::Primitive::Points);
+	Mesh mesh(std::move(vao), size, GLCore::Primitive::Points);
 	glEnable(GL_DEPTH_TEST);
 
 	while (!glfwWindowShouldClose(_glfwWindow)) {
