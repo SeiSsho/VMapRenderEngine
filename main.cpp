@@ -17,11 +17,12 @@ int main()
 {
 	SetConsoleOutputCP(CP_UTF8);
 	vmap::osm::Database::instance();
-	osmium::io::Reader reader(osmium::io::File("C:/Users/tts/Downloads/map (2).osm"));
+	osmium::io::Reader reader(osmium::io::File("D:/dont/Tai lieu/map (2).osm"));
 	osmium::apply(reader, vmap::osm::Handler());
 #ifdef NDEBUG
 	spdlog::set_level(spdlog::level::info);
 #else
+
 	spdlog::set_level(spdlog::level::trace);
 #endif
 	std::unique_ptr<GLWindow> window = std::make_unique<GLWindow>("hai", 1920, 1080, true);

@@ -1,7 +1,7 @@
 #include "Mesh.h"
 
-Mesh::Mesh(	std::unique_ptr<VertexAttributeObject> vao, 
-			const int& size, 
+Mesh::Mesh(	std::unique_ptr<VertexAttributeObject> vao,
+			const unsigned long long& size, 
 			const GLCore::Primitive& primitive)
 	: _vao(std::move(vao)), _size(size), _primitive(primitive)
 {

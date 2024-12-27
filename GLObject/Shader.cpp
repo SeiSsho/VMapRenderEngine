@@ -60,13 +60,15 @@ ShaderRegistry& ShaderRegistry::instance() {
 			"uniform mat4 model;     \n"
 			"void main()\n"
 			"{\n"
-			"   gl_Position = projection * view * model * vec4(aPos, 1.0f);\n"
+			"   gl_Position = projection * view * model * vec4(aPos.xyz, 1.0f);\n"
 			"}\0";
 		const char* fragmentShaderSource = "#version 330 core\n"
 			"out vec4 FragColor;\n"
+			"uniform vec3 u_color;\n"
 			"void main()\n"
 			"{\n"
-			"   FragColor = vec4(0.0, 1.0, 0.0, 1.0f);\n"
+			"   FragColor = vec4(u_color.xyz, 1.0f);\n"
+			//"   FragColor = vec4(0.0f, 1.0f, 0.0f, 1.0f);\n"
 			"}\n\0";
 		_instance->_shaders.try_emplace("Default", std::make_shared<Shader>(vertexShaderSource, fragmentShaderSource));
 	}

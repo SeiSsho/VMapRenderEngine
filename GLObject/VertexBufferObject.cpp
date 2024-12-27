@@ -5,7 +5,14 @@ VertexBufferObject::VertexBufferObject(GLfloat* vertices, const GLsizeiptr& size
 	spdlog::trace("[OpenGL]: Generate vertex buffer array {}", _id);
 	glGenBuffers(1, &_id);
 	glBindBuffer(GL_ARRAY_BUFFER, _id);
-	glBufferData(GL_ARRAY_BUFFER, size, vertices, usage);
+	glBufferData(GL_ARRAY_BUFFER, size * sizeof(float), vertices, usage);
+}
+
+VertexBufferObject::VertexBufferObject(GLdouble* vertices, const GLsizeiptr& size, const GLCore::Usage& usage) {
+	spdlog::trace("[OpenGL]: Generate vertex buffer array {}", _id);
+	glGenBuffers(1, &_id);
+	glBindBuffer(GL_ARRAY_BUFFER, _id);
+	glBufferData(GL_ARRAY_BUFFER, size * sizeof(double), vertices, usage);
 }
 
 VertexBufferObject::VertexBufferObject(std::span<float> vertices, const GLCore::Usage& usage)
@@ -13,7 +20,14 @@ VertexBufferObject::VertexBufferObject(std::span<float> vertices, const GLCore::
 	spdlog::trace("[OpenGL]: Generate vertex buffer array {}", _id);
 	glGenBuffers(1, &_id);
 	glBindBuffer(GL_ARRAY_BUFFER, _id);
-	glBufferData(GL_ARRAY_BUFFER, vertices.size(), vertices.data(), usage);
+	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(float), vertices.data(), usage);
+}
+
+VertexBufferObject::VertexBufferObject(std::span<double> vertices, const GLCore::Usage& usage) {
+	spdlog::trace("[OpenGL]: Generate vertex buffer array {}", _id);
+	glGenBuffers(1, &_id);
+	glBindBuffer(GL_ARRAY_BUFFER, _id);
+	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(double), vertices.data(), usage);
 }
 
 VertexBufferObject::~VertexBufferObject()

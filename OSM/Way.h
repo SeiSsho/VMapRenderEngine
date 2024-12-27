@@ -14,6 +14,7 @@ namespace vmap::osm {
 		Way();
 
 		const std::unordered_map<std::string, std::string>& tags() const;
+		std::unordered_map<std::string, std::string>& tags();
 		std::optional<std::string> getTagValue(std::string key) const;
 	};
 }

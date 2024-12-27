@@ -3,6 +3,7 @@
 #include "OpenGLCore.h"
 #include <string_view>
 
+#include "GUI.h"
 #include "Component/Camera.h"
 
 class GLWindow
@@ -24,7 +25,14 @@ public:
 private:
 	GLFWwindow* _glfwWindow = nullptr;
 	WindowInfo _windowInfo;
+	std::unique_ptr<GUI> _gui;
 
+	bool isDisplayPoint = false;
+	bool isDisplayLines = false;
+	bool isDisplayHighwayLines = false;
+	bool isDisplayBuildingLines = false;
+	bool isDisplayNaturalLines = false;
+	bool isDisplayPowerLines = false;
 public:
 	GLWindow(std::string_view title, const int& width, const int& height, const bool& useVsync = false);
 	~GLWindow();

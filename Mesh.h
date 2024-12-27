@@ -11,10 +11,10 @@
 class Mesh {
 private:
 	std::unique_ptr<VertexAttributeObject> _vao;
-	int _size;
+	unsigned long long _size;
 	GLCore::Primitive _primitive;
 public:
-	explicit Mesh(std::unique_ptr<VertexAttributeObject> vao, const int& size, const GLCore::Primitive& primitive);
+	explicit Mesh(std::unique_ptr<VertexAttributeObject> vao, const unsigned long long& size, const GLCore::Primitive& primitive);
 
 	/**
 	 * Update camera, projection, view matrix to shader before draw

@@ -23,5 +23,7 @@ public:
 	Transform(Transform&&) = default;
 	Transform(const Transform&) = default;
 	~Transform() = default;
+
+	glm::vec3 getEulerAngle() const;
 };
 

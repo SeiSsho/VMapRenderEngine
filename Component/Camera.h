@@ -4,15 +4,16 @@
 
 class Camera
 {
+	friend class GUI;
 public:
-	enum Type {
-		Orthographic,
-		Perspective
+	enum class Type : uint8_t {
+		Orthographic = 0x0,
+		Perspective = 0x1
 	};
 
 	Transform _transform;
 	float _fov, _aspect;
-	float _left, _right, _bottom, _top;
+	float _left, _right, _bottom, _top, _zoomScale = 1.0f;
 	float _near, _far;
 	Type _cameraType;
 
@@ -33,5 +34,6 @@ public:
 
 	glm::mat4 getViewMatrix() const;
 	glm::mat4 getProjectionMatrix() const;
+	void setZoomScale(const float& value);
 };
 

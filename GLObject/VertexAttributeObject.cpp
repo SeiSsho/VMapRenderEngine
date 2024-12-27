@@ -23,7 +23,7 @@ void VertexAttributeObject::link(const VertexBufferObject& vbo,
 										const bool& normalized)
 {
 	vbo.bind();
-	glVertexAttribPointer(layout, numComponents, type, normalized, stride, offset);
+	glVertexAttribPointer(layout, numComponents, type, normalized ? GL_TRUE : GL_FALSE, stride, offset);
 	glEnableVertexAttribArray(layout);
 	vbo.unbind();
 }

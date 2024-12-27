@@ -139,6 +139,7 @@
     <ClCompile Include="Component\Component.cpp" />
     <ClCompile Include="Component\Camera.cpp" />
     <ClCompile Include="GLObject\ElementBufferObject.cpp" />
+    <ClCompile Include="GUI.cpp" />
     <ClCompile Include="OSM\Handler.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="GameObject.cpp" />
@@ -164,6 +165,7 @@
     <ClInclude Include="Component\Camera.h" />
     <ClInclude Include="GLObject\ElementBufferObject.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GUI.h" />
     <ClInclude Include="OSM\Handler.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="Asset\Material.h" />
